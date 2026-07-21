@@ -1,41 +1,31 @@
-# DevPulse AI - Backend
+# DevPulse AI
 
-DevPulse AI is an AI Software Engineering Command Center designed to help developers understand codebases, explain architecture, detect bugs, generate documentation, and maintain project memory with **minimal OpenAI token usage**.
+DevPulse AI is organized as a two-part application:
 
-## Tech Stack
-- **Python 3.12** & **FastAPI**
-- **SQLite** with **SQLAlchemy**
-- **ChromaDB** for vector store embeddings
-- **Tree-sitter**, **AST**, & **Regex** for token-free local code parsing
-- **Tiktoken** for precise context length management
-- **OpenAI SDK** (`gpt-4.1-mini`, `text-embedding-3-small`)
+```
+.
+├── frontend/             # React client
+│   └── src/              # pages, components, contexts, hooks, and services
+├── backend/              # FastAPI service
+│   ├── app/              # API package, routes, services, schemas, and models
+│   ├── requirements.txt  # Python dependencies
+│   └── start.sh          # Backend development launcher
+└── vercel.json           # Deployment routing for both applications
+```
 
-## Key Architecture & Token Optimization
-- **AI Request Router**: Solves repository statistics, component counting, unused imports, route discovery, and metrics **100% locally** without calling OpenAI.
-- **RAG Engine**: Retrieves only Top 5 relevant chunks (400-600 tokens per chunk) keeping prompt context well under 2,000 tokens.
-- **Caching**: Multi-level cache for questions, documentation, and unchanged repository hashes.
+## Backend
 
-## Getting Started
+From `backend/`, install dependencies and start FastAPI:
 
-1. **Install Dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
+```bash
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+```
 
-2. **Configure Environment**:
-   ```bash
-   cp .env.example .env
-   # Add your OPENAI_API_KEY to .env
-   ```
+Create `backend/.env` and set `OPENAI_API_KEY` to enable AI-backed features.
 
-3. **Run Server**:
-   ```bash
-   uvicorn app.main:app --reload
-   ```
-   Or run the shell script:
-   ```bash
-   bash start.sh
-   ```
+The API documentation is available at `http://localhost:8000/docs`.
 
-4. **API Documentation**:
-   Access interactive OpenAPI docs at `http://localhost:8000/docs`.
+## Frontend
+
+The React source is isolated in `frontend/src/`. Run its package scripts from the `frontend/` directory once its package configuration is present.
