@@ -38,4 +38,4 @@ npm run dev
 
 ## Deploy the frontend to Vercel
 
-Push this repository to GitHub and import it in Vercel. Leave the project root at the repository root: `vercel.json` installs and builds the `frontend/` workspace and publishes `frontend/dist`. The SPA rewrite ensures that all client-side routes resolve correctly.
+Push this repository to GitHub and import it in Vercel. Set **Root Directory** to `frontend`; Vercel then installs dependencies, builds the app, and publishes `dist`. The SPA rewrite ensures that all client-side routes resolve correctly.
