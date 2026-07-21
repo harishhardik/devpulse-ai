@@ -1,41 +1,41 @@
-# DevPulse AI
+# DevPulse AI - Backend
 
-DevPulse AI is organized as a two-part application:
+DevPulse AI is an AI Software Engineering Command Center designed to help developers understand codebases, explain architecture, detect bugs, generate documentation, and maintain project memory with **minimal OpenAI token usage**.
 
-```
-.
-├── frontend/             # React client
-│   └── src/              # pages, components, contexts, hooks, and services
-├── backend/              # FastAPI service
-│   ├── app/              # API package, routes, services, schemas, and models
-│   ├── requirements.txt  # Python dependencies
-│   └── start.sh          # Backend development launcher
-└── vercel.json           # Frontend deployment configuration for Vercel
-```
+## Tech Stack
+- **Python 3.12** & **FastAPI**
+- **SQLite** with **SQLAlchemy**
+- **ChromaDB** for vector store embeddings
+- **Tree-sitter**, **AST**, & **Regex** for token-free local code parsing
+- **Tiktoken** for precise context length management
+- **OpenAI SDK** (`gpt-4.1-mini`, `text-embedding-3-small`)
 
-## Backend
+## Key Architecture & Token Optimization
+- **AI Request Router**: Solves repository statistics, component counting, unused imports, route discovery, and metrics **100% locally** without calling OpenAI.
+- **RAG Engine**: Retrieves only Top 5 relevant chunks (400-600 tokens per chunk) keeping prompt context well under 2,000 tokens.
+- **Caching**: Multi-level cache for questions, documentation, and unchanged repository hashes.
 
-From `backend/`, install dependencies and start FastAPI:
+## Getting Started
 
-```bash
-pip install -r requirements.txt
-uvicorn app.main:app --reload
-```
+1. **Install Dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-Create `backend/.env` and set `OPENAI_API_KEY` to enable AI-backed features.
+2. **Configure Environment**:
+   ```bash
+   cp .env.example .env
+   # Add your OPENAI_API_KEY to .env
+   ```
 
-The API documentation is available at `http://localhost:8000/docs`.
+3. **Run Server**:
+   ```bash
+   uvicorn app.main:app --reload
+   ```
+   Or run the shell script:
+   ```bash
+   bash start.sh
+   ```
 
-## Frontend
-
-The React source and build configuration are isolated in `frontend/`.
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-## Deploy the frontend to Vercel
-
-Push this repository to GitHub and import it in Vercel. Set **Root Directory** to `frontend`; Vercel then installs dependencies, builds the app, and publishes `dist`. The SPA rewrite ensures that all client-side routes resolve correctly.
+4. **API Documentation**:
+   Access interactive OpenAPI docs at `http://localhost:8000/docs`.

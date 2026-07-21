@@ -4,7 +4,8 @@ set -e
 echo "Starting DevPulse AI Backend Setup..."
 
 if [ ! -f .env ]; then
-    echo "No .env file found. Add OPENAI_API_KEY to backend/.env before using AI features."
+    echo "Creating .env from .env.example..."
+    cp .env.example .env
 fi
 
 echo "Installing dependencies..."
