@@ -51,13 +51,11 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 # Custom App Logs and Databases
-backend/app/logs/
-backend/app/vector_db/
-backend/app/uploads/
-backend/app/cache/
+app/logs/
+app/vector_db/
 *.log
 *.db
 *.sqlite3
 
 node_modules/
-frontend/dist/
+
